@@ -44,6 +44,7 @@ export type AnalyzeResponse =
   | { ok: false; error: string };
 
 export interface Settings {
+  /** Optional personal Anthropic key; when empty the hosted endpoint is used */
   apiKey: string;
   /** Enable the Claude-powered second layer */
   aiEnabled: boolean;
@@ -55,3 +56,6 @@ export const DEFAULT_SETTINGS: Settings = {
   aiEnabled: true,
   model: "claude-opus-4-8",
 };
+
+/** SafeSurf hosted analysis endpoint (no setup required). */
+export const HOSTED_ENDPOINT = "https://safesurf-blush.vercel.app/api/analyze";

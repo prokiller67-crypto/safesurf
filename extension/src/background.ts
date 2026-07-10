@@ -9,6 +9,7 @@ import {
   AnalyzeResponse,
   AiVerdict,
   DEFAULT_SETTINGS,
+  HOSTED_ENDPOINT,
   Settings,
 } from "./types";
 
@@ -52,10 +53,32 @@ async function getSettings(): Promise<Settings> {
   return { ...DEFAULT_SETTINGS, ...stored } as Settings;
 }
 
+/** Default path: SafeSurf's hosted endpoint — zero setup for the user. */
+async function analyzeHosted(req: AnalyzeRequest): Promise<AnalyzeResponse> {
+  try {
+    const res = await fetch(HOSTED_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: req.url,
+        title: req.title,
+        textSample: req.textSample,
+        heuristics: req.heuristics,
+      }),
+    });
+    const data = (await res.json()) as AnalyzeResponse;
+    if (!res.ok) return { ok: false, error: (data as { error?: string }).error ?? `HTTP ${res.status}` };
+    return data;
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
 async function analyze(req: AnalyzeRequest): Promise<AnalyzeResponse> {
   const settings = await getSettings();
   if (!settings.aiEnabled) return { ok: false, error: "AI layer disabled" };
-  if (!settings.apiKey) return { ok: false, error: "No API key configured" };
+  // No personal key → use the hosted endpoint (works out of the box)
+  if (!settings.apiKey) return analyzeHosted(req);
 
   const client = new Anthropic({
     apiKey: settings.apiKey,

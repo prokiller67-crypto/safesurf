@@ -47,14 +47,14 @@
   <h1>🛡️ SafeSurf</h1>
   <div class="tagline">AI scam shield for the people you love</div>
 
-  <label for="apiKey">Anthropic API key</label>
-  <input type="password" id="apiKey" placeholder="sk-ant-..." />
-  <div class="hint">Stored only in your browser (chrome.storage.sync).</div>
-
-  <div class="row">
+  <div class="row" style="margin-top:0">
     <input type="checkbox" id="aiEnabled" />
-    <label for="aiEnabled">Enable AI analysis (Claude)</label>
+    <label for="aiEnabled">AI analysis (SafeSurf Cloud — no setup needed)</label>
   </div>
+
+  <label for="apiKey">Your own Anthropic API key <span style="font-weight:400;color:#64748b">(optional)</span></label>
+  <input type="password" id="apiKey" placeholder="sk-ant-... (leave empty to use SafeSurf Cloud)" />
+  <div class="hint">If set, analysis runs with your key directly — it never leaves your browser.</div>
 
   <button id="save">Save</button>
   <div id="status"></div>
