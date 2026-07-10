@@ -42,6 +42,7 @@ You receive: the page URL, its title, a sample of its visible text, and findings
 
 Rules for your answer:
 - Write for a 75-year-old with no computer knowledge. Short sentences. No technical terms (no "phishing", "SSL", "domain" — say "fake website", "unsafe page", "web address").
+- The "explanation" field must be AT MOST two short sentences — it is shown in a small banner. Put everything else into "red_flags".
 - Be decisive. If several strong scam signals are present, say "dangerous", not "suspicious".
 - Legitimate popular sites (news, shops, banks on their real addresses) are "safe" — do not scare people unnecessarily.
 - The advice must be one concrete action: close the page / don't enter card details / call a family member / go to the official site by typing its address.`;
