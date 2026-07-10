@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SafeSurf — Brainwave 2026 Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #faf5ea;
+    --paper-deep: #f0e8d6;
+    --ink: #10281f;
+    --pine: #0e3b2e;
+    --pine-soft: #1c5a46;
+    --amber: #f0a422;
+    --alarm: #c62b2b;
+    --leaf: #15803d;
+    --hairline: rgba(16, 40, 31, 0.16);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #d9d2c0; font-family: "Atkinson Hyperlegible", Georgia, serif; color: var(--ink); }
+
+  .slide {
+    width: 1280px; height: 720px;
+    margin: 24px auto;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    padding: 64px 76px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    page-break-after: always;
+    display: flex; flex-direction: column;
+  }
+  .slide.dark { background: var(--pine); color: var(--paper); }
+
+  h1, h2, h3, .display { font-family: "Bricolage Grotesque", sans-serif; }
+  .slide-num {
+    position: absolute; bottom: 26px; right: 34px;
+    font-size: 14px; opacity: 0.45; font-weight: 700;
+  }
+  .brand {
+    position: absolute; bottom: 24px; left: 34px;
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 15px; opacity: 0.55;
+  }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--pine-soft); margin-bottom: 18px;
+  }
+  .kicker::before { content: ""; width: 34px; height: 3px; background: var(--amber); }
+  .dark .kicker { color: var(--amber); }
+
+  h2 { font-size: 46px; font-weight: 800; letter-spacing: -1px; line-height: 1.05; margin-bottom: 22px; }
+  .lede { font-size: 24px; line-height: 1.5; max-width: 58ch; }
+
+  /* grain */
+  .slide::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── slide 1: title ── */
+  .title-slide { justify-content: center; align-items: flex-start; }
+  .title-slide .logo { font-size: 30px; font-weight: 800; margin-bottom: 40px; }
+  .title-slide .logo span { color: var(--amber); }
+  .title-slide h1 { font-size: 84px; font-weight: 800; letter-spacing: -3px; line-height: 0.98; max-width: 20ch; }
+  .title-slide h1 em { font-style: normal; color: var(--amber); }
+  .title-slide .sub { font-size: 26px; margin-top: 28px; opacity: 0.92; }
+  .title-slide .links { margin-top: 46px; font-size: 19px; line-height: 1.8; opacity: 0.85; }
+  .title-slide .links b { color: var(--amber); }
+
+  /* stats grid */
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 26px; margin-top: 34px; }
+  .stat-card { background: var(--paper-deep); border: 1.5px solid var(--hairline); border-radius: 18px; padding: 30px 28px; }
+  .stat-card .num { font-family: "Bricolage Grotesque", sans-serif; font-size: 54px; font-weight: 800; color: var(--alarm); line-height: 1; }
+  .stat-card .cap { font-size: 18px; margin-top: 12px; line-height: 1.45; }
+
+  /* comparison */
+  .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; flex: 1; }
+  .vs .panel { border-radius: 18px; padding: 34px 32px; display: flex; flex-direction: column; }
+  .vs .them { background: #2b2b2b; color: #9aa0a6; }
+  .vs .them .msg { font-family: monospace; font-size: 24px; color: #e8eaed; background: #202124; border-radius: 10px; padding: 22px; margin-top: 18px; }
+  .vs .us { background: var(--alarm); color: #fff; }
+  .vs .us .msg { font-size: 25px; line-height: 1.5; margin-top: 18px; font-weight: 700; }
+  .vs h3 { font-size: 22px; opacity: 0.85; }
+  .vs .verdict { margin-top: auto; font-size: 17px; opacity: 0.75; }
+
+  /* architecture */
+  .arch { display: flex; align-items: stretch; gap: 0; margin-top: 36px; }
+  .arch .box {
+    background: var(--paper-deep); border: 2px solid var(--pine); border-radius: 18px;
+    padding: 26px 24px; flex: 1;
+  }
+  .arch .box h3 { font-size: 22px; margin-bottom: 10px; }
+  .arch .box ul { padding-left: 18px; font-size: 16.5px; line-height: 1.55; }
+  .arch .arrow {
+    align-self: center; font-size: 40px; padding: 0 16px; color: var(--pine-soft); font-weight: 800;
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+  .arch .box.ai { border-color: var(--amber); background: #fdf3dd; }
+  .arch .box.banner-box { border-color: var(--alarm); background: #fdeaea; }
+  .badge { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--pine); color: var(--paper); border-radius: 999px; padding: 4px 12px; margin-bottom: 12px; }
+  .badge.amber { background: var(--amber); color: var(--ink); }
+  .badge.red { background: var(--alarm); color: #fff; }
+
+  /* tech list */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 26px; }
+  .check-list { list-style: none; padding: 0; font-size: 21px; line-height: 1.5; }
+  .check-list li { margin-bottom: 16px; padding-left: 40px; position: relative; }
+  .check-list li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--leaf); color: #fff; font-weight: 800; font-size: 17px; display: flex; align-items: center; justify-content: center; }
+  .check-list.amber li::before { background: var(--amber); color: var(--ink); }
+  .dark .check-list li::before { background: var(--amber); color: var(--ink); }
+
+  code { font-family: "SF Mono", Menlo, monospace; font-size: 0.82em; background: rgba(14,59,46,0.1); border-radius: 5px; padding: 2px 7px; }
+  .dark code { background: rgba(250,245,234,0.14); }
+
+  /* demo slide */
+  .shots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; margin-top: 30px; }
+  .shot { border-radius: 14px; overflow: hidden; border: 1.5px solid var(--hairline); background: #fff; }
+  .shot .bar { background: #e8e2d2; font-family: monospace; font-size: 12px; padding: 7px 12px; color: #8a3030; white-space: nowrap; overflow: hidden; }
+  .shot .body { padding: 16px; font-size: 14px; min-height: 150px; }
+  .shot .mini-banner { border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 12.5px; margin-bottom: 10px; }
+  .shot .mini-banner b { display: block; font-size: 13.5px; margin-bottom: 3px; }
+  .cta-line { margin-top: 26px; font-size: 22px; font-weight: 700; }
+  .cta-line code { font-size: 19px; }
+
+  /* impact numbers */
+  .impact-row { display: flex; gap: 26px; margin-top: 30px; }
+  .impact-card { flex: 1; background: rgba(250,245,234,0.08); border: 1.5px solid rgba(250,245,234,0.25); border-radius: 18px; padding: 28px 26px; }
+  .impact-card h3 { font-size: 22px; color: var(--amber); margin-bottom: 10px; }
+  .impact-card p { font-size: 17.5px; line-height: 1.5; opacity: 0.92; }
+
+  /* roadmap */
+  .road { display: flex; gap: 18px; margin-top: 34px; }
+  .road .stage { flex: 1; background: var(--paper-deep); border: 1.5px solid var(--hairline); border-radius: 16px; padding: 24px 22px; }
+  .road .stage .when { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pine-soft); margin-bottom: 10px; }
+  .road .stage ul { padding-left: 18px; font-size: 16.5px; line-height: 1.5; }
+
+  /* closing */
+  .closing { justify-content: center; }
+  .closing h2 { font-size: 64px; max-width: 18ch; }
+  .closing .links { margin-top: 40px; font-size: 22px; line-height: 2; }
+  .closing .links b { color: var(--amber); }
+
+  @media print {
+    body { background: none; }
+    .slide { margin: 0; box-shadow: none; }
+    .slide::after { display: none; } /* grain rasterizes huge in PDF */
+    @page { size: 1280px 720px; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1 · TITLE -->
+<section class="slide dark title-slide">
+  <div class="logo">🛡️ Safe<span>Surf</span></div>
+  <h1>The scam shield for <em>the people you love.</em></h1>
+  <div class="sub">A Chrome extension that catches scams in real time — and explains the danger in words a 75-year-old actually understands.</div>
+  <div class="links">
+    <b>Live:</b> safesurf-blush.vercel.app &nbsp;·&nbsp; <b>Code:</b> github.com/prokiller67-crypto/safesurf<br />
+    Brainwave 2026 · AI × Cybersecurity · Nikita Nizhevyasov
+  </div>
+  <div class="slide-num">1 / 10</div>
+</section>
+
+<!-- 2 · PROBLEM -->
+<section class="slide">
+  <div class="kicker">The problem</div>
+  <h2>Online fraud is a tax on old age.</h2>
+  <p class="lede">Scammers deliberately target people who grew up before the internet — with fake virus pop-ups, “grandchild in trouble” messages and pixel-perfect bank clones.</p>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="num">$4.8B</div><div class="cap">lost by Americans aged 60+ to online fraud in 2024 (FBI IC3)</div></div>
+    <div class="stat-card"><div class="num">147k</div><div class="cap">complaints from seniors in one year — the fastest-growing victim group</div></div>
+    <div class="stat-card"><div class="num">×4</div><div class="cap">seniors lose ~4× more per incident than victims under 30</div></div>
+  </div>
+  <div class="brand">🛡️ SafeSurf</div>
+  <div class="slide-num">2 / 10</div>
+</section>
+
+<!-- 3 · INSIGHT -->
+<section class="slide">
+  <div class="kicker">The insight</div>
+  <h2>Detection isn’t the gap. <br />Communication is.</h2>
+  <div class="vs">
+    <div class="panel them">
+      <h3>What security tools say</h3>
+      <div class="msg">NET::ERR_CERT_AUTHORITY_INVALID<br /><br />Deceptive site ahead. Attackers may trick you into doing something dangerous.</div>
+      <div class="verdict">Jargon → fear → “I’ll just click Continue”</div>
+    </div>
+    <div class="panel us">
+      <h3>What SafeSurf says</h3>
+      <div class="msg">🛑 This page pretends to be your bank.<br /><br />👉 Close it and don’t type your password. If unsure, call your family.</div>
+      <div class="verdict" style="color:#fff">Plain words → understanding → right action</div>
+    </div>
+  </div>
+  <div class="brand">🛡️ SafeSurf</div>
+  <div class="slide-num">3 / 10</div>
+</section>
+
+<!-- 4 · SOLUTION -->
+<section class="slide">
+  <div class="kicker">The solution</div>
+  <h2>A guardian that speaks human.</h2>
+  <p class="lede">SafeSurf watches every page and shows a big, high-contrast traffic-light banner the moment something is wrong — with one plain-language explanation and one concrete action.</p>
+  <div class="two-col">
+    <ul class="check-list">
+      <li><b>🛑 Danger / ⚠️ Caution / ✅ silence</b> — no nagging on safe pages, loud when it matters</li>
+      <li><b>Huge type, high contrast</b> — designed for older eyes</li>
+      <li><b>One action</b> — “Close this page”, not a settings menu</li>
+    </ul>
+    <ul class="check-list amber">
+      <li><b>Zero jargon</b> — “fake website”, never “phishing domain”</li>
+      <li><b>Body font: Atkinson Hyperlegible</b> — a typeface built for low-vision readers</li>
+      <li><b>Works without setup</b> — heuristics protect even with no API key</li>
+    </ul>
+  </div>
+  <div class="brand">🛡️ SafeSurf</div>
+  <div class="slide-num">4 / 10</div>
+</section>
+
+<!-- 5 · HOW IT WORKS -->
+<section class="slide">
+  <div class="kicker">How it works</div>
+  <h2>Two layers. Fail-safe by design.</h2>
+  <div class="arch">
+    <div class="box">
+      <span class="badge">Layer 1 · instant · offline</span>
+      <h3>Local heuristics</h3>
+      <ul>
+        <li>Typosquatting: <code>paypa1.com</code>, look-alike unicode</li>
+        <li>Brand-in-address tricks: <code>paypal.com.evil.xyz</code></li>
+        <li>12 scam-script patterns: fake prizes, fake virus alerts, gift-card payments, remote access</li>
+        <li>Dark patterns: countdowns, “do not close”</li>
+      </ul>
+    </div>
+    <div class="arrow">→</div>
+    <div class="box ai">
+      <span class="badge amber">Layer 2 · Claude AI</span>
+      <h3>AI second opinion</h3>
+      <ul>
+        <li>Fires <b>only</b> when Layer 1 flags something</li>
+        <li>Weighs URL + page text + heuristic evidence</li>
+        <li>Structured JSON verdict: risk, explanation, advice</li>
+        <li>Written for a senior, decisive by prompt design</li>
+      </ul>
+    </div>
+    <div class="arrow">→</div>
+    <div class="box banner-box">
+      <span class="badge red">Verdict</span>
+      <h3>The banner</h3>
+      <ul>
+        <li>Heuristic warning appears in &lt;50 ms</li>
+        <li>AI upgrades it seconds later</li>
+        <li>API down? Heuristic warning stays</li>
+        <li>Safe page? Total silence</li>
+      </ul>
+    </div>
+  </div>
+  <div class="brand">🛡️ SafeSurf</div>
+  <div class="slide-num">5 / 10</div>
+</section>
+
+<!-- 6 · TECH -->
+<section class="slide dark">
+  <div class="kicker">Technical implementation</div>
+  <h2>Small, honest, production-shaped.</h2>
+  <div class="two-col">
+    <ul class="check-list">
+      <li><b>Chrome Manifest V3</b> — TypeScript, esbuild, content script + service worker</li>
+      <li><b>Claude Opus 4.8</b> via official SDK with <b>structured outputs</b> (<code>output_config.format</code>) — the verdict is schema-validated JSON, never free text</li>
+      <li><b>Prompt-injection hardened</b> — page text is fenced as untrusted content</li>
+    </ul>
+    <ul class="check-list">
+      <li><b>Privacy-first</b> — page text leaves the machine <i>only</i> when heuristics flag it; normal browsing is never sent anywhere</li>
+      <li><b>Key stays local</b> — <code>chrome.storage</code>, user’s own browser profile</li>
+      <li><b>Tested</b> — heuristic engine verified against scam & legit URL corpus</li>
+    </ul>
+  </div>
+  <div class="brand" style="opacity:.7">🛡️ SafeSurf</div>
+  <div class="slide-num">6 / 10</div>
+</section>
+
+<!-- 7 · DEMO -->
+<section class="slide">
+  <div class="kicker">Demo</div>
+  <h2>Watch it catch three real scam patterns.</h2>
+  <div class="shots">
+    <div class="shot">
+      <div class="bar">windows-defender-alert.top</div>
+      <div class="body">
+        <div class="mini-banner" style="background:var(--alarm)"><b>🛑 DANGER — this looks like a scam</b>This page pretends to be a Microsoft virus warning.</div>
+        Fake “5 viruses found”, phone number, remote-access ask.
+      </div>
+    </div>
+    <div class="shot">
+      <div class="bar">win-your-iphone.click</div>
+      <div class="body">
+        <div class="mini-banner" style="background:var(--alarm)"><b>🛑 DANGER — this looks like a scam</b>Nobody gives away free iPhones. The timer is fake.</div>
+        Prize scam with countdown + card form.
+      </div>
+    </div>
+    <div class="shot">
+      <div class="bar">paypa1-verify.top/login</div>
+      <div class="body">
+        <div class="mini-banner" style="background:var(--alarm)"><b>🛑 DANGER — this looks like a scam</b>This is not the real PayPal website.</div>
+        Look-alike bank login hunting for passwords.
+      </div>
+    </div>
+  </div>
+  <div class="cta-line">▶ Live demos: <code>safesurf-blush.vercel.app</code> — install the extension, click a tile, watch the banner.</div>
+  <div class="brand">🛡️ SafeSurf</div>
+  <div class="slide-num">7 / 10</div>
+</section>
+
+<!-- 8 · IMPACT -->
+<section class="slide dark">
+  <div class="kicker">Impact</div>
+  <h2>Built for the most-targeted, least-protected users online.</h2>
+  <div class="impact-row">
+    <div class="impact-card">
+      <h3>For seniors</h3>
+      <p>Independence without fear. They keep banking, shopping and video-calling — SafeSurf only speaks up when something is genuinely wrong.</p>
+    </div>
+    <div class="impact-card">
+      <h3>For families</h3>
+      <p>Install once during a Sunday visit. Every warning ends with a human fallback: “if unsure, call your family.”</p>
+    </div>
+    <div class="impact-card">
+      <h3>For everyone</h3>
+      <p>Plain-language security helps kids, non-native speakers and cognitively-impaired users too. Accessibility is the product, not a feature.</p>
+    </div>
+  </div>
+  <div class="brand" style="opacity:.7">🛡️ SafeSurf</div>
+  <div class="slide-num">8 / 10</div>
+</section>
+
+<!-- 9 · SCALABILITY -->
+<section class="slide">
+  <div class="kicker">Scalability & future</div>
+  <h2>From one banner to a family safety net.</h2>
+  <div class="road">
+    <div class="stage">
+      <div class="when">Now — MVP</div>
+      <ul>
+        <li>Chrome extension, 2-layer detection</li>
+        <li>Open source, bring-your-own key</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="when">Next 3 months</div>
+      <ul>
+        <li>Family Guardian dashboard: gentle alerts to a trusted contact on “danger” events</li>
+        <li>Firefox / Edge ports</li>
+        <li>Multilingual verdicts (ES, RU, HI…)</li>
+      </ul>
+    </div>
+    <div class="stage">
+      <div class="when">12 months</div>
+      <ul>
+        <li>Email & SMS scam scanning</li>
+        <li>On-device small model for layer 2 — zero-cloud mode</li>
+        <li>Partnerships: banks, senior-care orgs, ISPs</li>
+      </ul>
+    </div>
+  </div>
+  <p class="lede" style="margin-top:28px; font-size:20px">Unit economics scale: heuristics are free; AI calls happen only on flagged pages (&lt;2% of browsing), pennies per user per month.</p>
+  <div class="brand">🛡️ SafeSurf</div>
+  <div class="slide-num">9 / 10</div>
+</section>
+
+<!-- 10 · CLOSING -->
+<section class="slide dark closing">
+  <div class="kicker">Closing</div>
+  <h2>Scammers weaponized language. <br />We weaponized it back.</h2>
+  <div class="links">
+    🌐 <b>Live demo:</b> safesurf-blush.vercel.app<br />
+    💻 <b>Code:</b> github.com/prokiller67-crypto/safesurf<br />
+    🛡️ <b>SafeSurf</b> — Brainwave 2026
+  </div>
+  <div class="slide-num">10 / 10</div>
+</section>
+
+</body>
+</html>
