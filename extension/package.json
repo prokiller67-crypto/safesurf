@@ -1,0 +1,19 @@
+{
+  "name": "safesurf",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SafeSurf — AI-powered scam shield for seniors (Chrome extension)",
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.111.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.280",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0"
+  }
+}

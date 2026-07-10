@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "SafeSurf — Scam Shield for Seniors",
+  "version": "0.1.0",
+  "description": "Detects phishing, scams and dark patterns in real time and explains the danger in plain, friendly language.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*", "file://*/*"],
+      "js": ["content.js"],
+      "css": ["banner.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "SafeSurf"
+  }
+}

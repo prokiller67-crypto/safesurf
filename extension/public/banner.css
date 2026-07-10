@@ -1,0 +1,77 @@
+/* SafeSurf banner — designed for elderly users: huge type, high contrast. */
+#safesurf-banner {
+  all: initial;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2147483647;
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.25);
+  animation: safesurf-slide 0.35s ease-out;
+}
+
+@keyframes safesurf-slide {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+#safesurf-banner.safesurf-danger { background: #b91c1c; color: #ffffff; }
+#safesurf-banner.safesurf-warn { background: #f59e0b; color: #1f2937; }
+#safesurf-banner.safesurf-safe { background: #15803d; color: #ffffff; }
+
+#safesurf-banner .safesurf-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 20px 24px 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+#safesurf-banner .safesurf-emoji {
+  font-size: 44px;
+  line-height: 1;
+}
+
+#safesurf-banner .safesurf-texts { flex: 1; }
+
+#safesurf-banner .safesurf-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+}
+
+#safesurf-banner .safesurf-explain {
+  font-size: 20px;
+  line-height: 1.45;
+  margin-bottom: 6px;
+}
+
+#safesurf-banner .safesurf-advice {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+#safesurf-banner .safesurf-close {
+  all: initial;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+#safesurf-banner .safesurf-close:hover { background: rgba(255, 255, 255, 0.4); }
+
+#safesurf-banner .safesurf-footer {
+  font-size: 13px;
+  opacity: 0.85;
+  text-align: center;
+  padding: 0 0 8px;
+}
